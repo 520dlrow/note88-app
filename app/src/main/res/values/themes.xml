@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="Theme.Note88" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:windowBackground">#e8dcc0</item>
+        <item name="android:statusBarColor">#e8dcc0</item>
+        <item name="android:windowLightStatusBar">true</item>
+    </style>
+</resources>
