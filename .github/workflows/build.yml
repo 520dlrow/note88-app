@@ -22,24 +22,44 @@ jobs:
         run: |
           mkdir -p app/src/main/assets/fonts
           mkdir -p app/src/main/assets/pdfjs
+
+          BASE="https://raw.githubusercontent.com/google/fonts/main/ofl"
+
+          download() {
+            local url="$1"
+            local out="$2"
+            curl -sSL -o "$out" "$url" 2>/dev/null
+            local size=$(stat -c%s "$out" 2>/dev/null || echo 0)
+            if [ "$size" -lt 1000 ]; then
+              echo "⚠ $out ($size bytes) — removing"
+              rm -f "$out"
+            else
+              echo "✓ $out ($size bytes)"
+            fi
+          }
+
           cd app/src/main/assets/fonts
-          curl -sfL -o pirata.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/pirataone/PirataOne-Regular.ttf"
-          curl -sfL -o unifraktur.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/unifrakturmaguntia/UnifrakturMaguntia-Regular.ttf"
-          curl -sfL -o grenze.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/grenzegotisch/GrenzeGotisch%5Bwght%5D.ttf"
-          curl -sfL -o medieval.ttf   "https://raw.githubusercontent.com/google/fonts/main/ofl/medievalsharp/MedievalSharp-Regular.ttf"
-          curl -sfL -o caveat.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf"
-          curl -sfL -o kalam.ttf      "https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/Kalam-Regular.ttf"
-          curl -sfL -o shadows.ttf    "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight.ttf"
-          curl -sfL -o patrick.ttf    "https://raw.githubusercontent.com/google/fonts/main/ofl/patrickhand/PatrickHand-Regular.ttf"
-          curl -sfL -o gochi.ttf      "https://raw.githubusercontent.com/google/fonts/main/ofl/gochihand/GochiHand-Regular.ttf"
-          curl -sfL -o homemade.ttf   "https://raw.githubusercontent.com/google/fonts/main/ofl/homemadeapple/HomemadeApple-Regular.ttf"
-          cd ../../pdfjs
-          curl -sfL -o pdf.min.js        "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"
-          curl -sfL -o pdf.worker.min.js "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"
+          download "$BASE/pirataone/PirataOne-Regular.ttf"                                  pirata.ttf
+          download "$BASE/unifrakturmaguntia/UnifrakturMaguntia-Regular.ttf"                unifraktur.ttf
+          download "$BASE/grenzegotisch/GrenzeGotisch%5Bwght%5D.ttf"                        grenze.ttf
+          download "$BASE/medievalsharp/MedievalSharp-Regular.ttf"                          medieval.ttf
+          download "$BASE/caveat/Caveat%5Bwght%5D.ttf"                                      caveat.ttf
+          download "$BASE/kalam/Kalam-Regular.ttf"                                          kalam.ttf
+          download "$BASE/shadowsintolight/ShadowsIntoLight.ttf"                            shadows.ttf
+          download "$BASE/patrickhand/PatrickHand-Regular.ttf"                              patrick.ttf
+          download "$BASE/gochihand/GochiHand-Regular.ttf"                                  gochi.ttf
+          download "$BASE/homemadeapple/HomemadeApple-Regular.ttf"                          homemade.ttf
+          cd -
+
+          cd app/src/main/assets/pdfjs
+          download "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"        pdf.min.js
+          download "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js" pdf.worker.min.js
+          cd -
+
           echo "--- fonts ---"
-          ls -la ../fonts/
+          ls -la app/src/main/assets/fonts/ || true
           echo "--- pdfjs ---"
-          ls -la .
+          ls -la app/src/main/assets/pdfjs/ || true
 
       - run: gradle assembleDebug
 
