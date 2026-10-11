@@ -10,12 +10,39 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - uses: actions/setup-java@v5
         with:
           java-version: '17'
           distribution: 'temurin'
+
       - uses: gradle/actions/setup-gradle@v4
+
+      - name: Download fonts and pdf.js
+        run: |
+          mkdir -p app/src/main/assets/fonts
+          mkdir -p app/src/main/assets/pdfjs
+          cd app/src/main/assets/fonts
+          curl -sfL -o pirata.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/pirataone/PirataOne-Regular.ttf"
+          curl -sfL -o unifraktur.ttf "https://raw.githubusercontent.com/google/fonts/main/ofl/unifrakturmaguntia/UnifrakturMaguntia-Regular.ttf"
+          curl -sfL -o grenze.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/grenzegotisch/GrenzeGotisch%5Bwght%5D.ttf"
+          curl -sfL -o medieval.ttf   "https://raw.githubusercontent.com/google/fonts/main/ofl/medievalsharp/MedievalSharp-Regular.ttf"
+          curl -sfL -o caveat.ttf     "https://raw.githubusercontent.com/google/fonts/main/ofl/caveat/Caveat%5Bwght%5D.ttf"
+          curl -sfL -o kalam.ttf      "https://raw.githubusercontent.com/google/fonts/main/ofl/kalam/Kalam-Regular.ttf"
+          curl -sfL -o shadows.ttf    "https://raw.githubusercontent.com/google/fonts/main/ofl/shadowsintolight/ShadowsIntoLight.ttf"
+          curl -sfL -o patrick.ttf    "https://raw.githubusercontent.com/google/fonts/main/ofl/patrickhand/PatrickHand-Regular.ttf"
+          curl -sfL -o gochi.ttf      "https://raw.githubusercontent.com/google/fonts/main/ofl/gochihand/GochiHand-Regular.ttf"
+          curl -sfL -o homemade.ttf   "https://raw.githubusercontent.com/google/fonts/main/ofl/homemadeapple/HomemadeApple-Regular.ttf"
+          cd ../../pdfjs
+          curl -sfL -o pdf.min.js        "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js"
+          curl -sfL -o pdf.worker.min.js "https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js"
+          echo "--- fonts ---"
+          ls -la ../fonts/
+          echo "--- pdfjs ---"
+          ls -la .
+
       - run: gradle assembleDebug
+
       - uses: actions/upload-artifact@v4
         with:
           name: note88-apk
