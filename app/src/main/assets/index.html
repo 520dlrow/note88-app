@@ -8,17 +8,13 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Pirata+One&family=UnifrakturMaguntia&family=Grenze+Gotisch:wght@400;700&family=MedievalSharp&family=Caveat:wght@400;700&family=Kalam:wght@400;700&family=Shadows+Into+Light&family=Patrick+Hand&family=Gochi+Hand&family=Homemade+Apple&display=swap" rel="stylesheet">
 <style>
-/* ---- tokens ---- */
 :root{
   --ink: #2b2116;
   --ink-soft: #4a3a28;
-  --shadow: rgba(60,40,20,.18);
   --gold: #b8862e;
   --red: #a82828;
   --font-ui: 'Patrick Hand', 'Segoe UI', system-ui, sans-serif;
   --font-mono: ui-monospace, 'SF Mono', Menlo, monospace;
-  --font-serif: 'Caveat', Georgia, serif;
-  --radius: 14px;
   --ease: cubic-bezier(.2,.8,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
@@ -40,7 +36,6 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
   box-shadow:0 0 40px rgba(0,0,0,.5);
 }
 
-/* ---- header ---- */
 .hd{
   display:flex;align-items:center;justify-content:space-between;
   padding:14px 18px 10px;
@@ -70,14 +65,12 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
 .icon-btn:active{background:rgba(255,255,255,.12);transform:scale(.94)}
 .icon-btn svg{width:20px;height:20px;fill:none;stroke:#c9b58c;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
 
-/* ---- stage ---- */
 .stage{
   flex:1;overflow:hidden;position:relative;
   display:flex;align-items:center;justify-content:center;
   padding:16px;
   perspective:1400px;
 }
-
 .paper{
   position:relative;
   width:100%;height:100%;max-width:640px;
@@ -89,21 +82,17 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
   transform-style:preserve-3d;
   backface-visibility:hidden;
 }
-
 .paper::before{
   content:'';position:absolute;inset:0;pointer-events:none;
   background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 .35  0 0 0 0 .25  0 0 0 0 .12  0 0 0 .14 0'/></filter><rect width='240' height='240' filter='url(%23n)'/></svg>");
   mix-blend-mode:multiply;opacity:.9;
 }
-
 .paper::after{
   content:'';position:absolute;inset:0;pointer-events:none;
   background:
     radial-gradient(ellipse at 20% 15%, rgba(255,240,200,.35), transparent 55%),
     radial-gradient(ellipse at 85% 85%, rgba(120,80,30,.25), transparent 55%);
 }
-
-/* Paper themes */
 .theme-parchment{background:linear-gradient(160deg,#f0e2bd 0%,#e6d19a 45%,#d4b878 100%)}
 .theme-linen{background:
   repeating-linear-gradient(to bottom,transparent 0,transparent 33px,rgba(80,60,40,.14) 33px,rgba(80,60,40,.14) 34px),
@@ -112,7 +101,6 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
 .theme-kraft{background:linear-gradient(150deg,#dcc69b 0%,#c9a878 60%,#b08858 100%)}
 .theme-cream{background:linear-gradient(180deg,#faf3e0 0%,#f1e7cc 100%)}
 
-/* ---- editor ---- */
 .editor{
   position:relative;z-index:1;
   width:100%;height:100%;
@@ -133,19 +121,16 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
   pointer-events:none;
 }
 .editor[dir="rtl"]{text-align:right}
-.editor mark{padding:1px 3px;border-radius:3px;color:inherit}
-.editor mark.hl-yellow{background:rgba(255,222,80,.7)}
-.editor mark.hl-green{background:rgba(150,220,120,.6)}
-.editor mark.hl-pink{background:rgba(255,170,190,.6)}
-.editor mark.hl-blue{background:rgba(150,200,255,.6)}
-.editor mark.hl-orange{background:rgba(255,180,120,.65)}
+.editor img{
+  max-width:100%;max-height:420px;
+  border-radius:8px;margin:8px 0;display:block;
+  box-shadow:0 4px 12px rgba(0,0,0,.2);
+}
 
-/* ---- wax seal ---- */
 .seal{
   position:absolute;bottom:22px;right:22px;z-index:2;
   width:60px;height:60px;border-radius:50%;
-  background:
-    radial-gradient(circle at 32% 28%, #d84a3a 0%, #b02a2a 40%, #7a1212 75%, #4a0808 100%);
+  background:radial-gradient(circle at 32% 28%, #d84a3a 0%, #b02a2a 40%, #7a1212 75%, #4a0808 100%);
   box-shadow:
     inset -3px -4px 10px rgba(0,0,0,.55),
     inset 3px 3px 8px rgba(255,200,150,.25),
@@ -156,7 +141,6 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
   font-size:16px;letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,.6);
   pointer-events:none;
-  transition:opacity .4s var(--ease);
 }
 .seal::before{
   content:'';position:absolute;inset:6px;border-radius:50%;
@@ -168,7 +152,6 @@ input{font:inherit;color:inherit;border:0;background:none;outline:none}
 }
 body.reading .seal{opacity:.5}
 
-/* ---- footer toolbar ---- */
 .tb{
   display:flex;align-items:center;justify-content:space-between;gap:6px;
   padding:12px 18px;
@@ -192,7 +175,6 @@ body.reading .seal{opacity:.5}
 .tb-btn span{display:none}
 @media (min-width:520px){.tb-btn span{display:inline}}
 
-/* ---- sheet (bottom panel) ---- */
 .sheet{
   position:absolute;left:0;right:0;bottom:0;z-index:50;
   background:#2a2218;
@@ -200,7 +182,7 @@ body.reading .seal{opacity:.5}
   box-shadow:0 -20px 60px rgba(0,0,0,.6);
   transform:translateY(100%);
   transition:transform .35s var(--ease);
-  max-height:72vh;overflow-y:auto;
+  max-height:76vh;overflow-y:auto;
 }
 .sheet.on{transform:translateY(0)}
 .sheet-head{
@@ -217,6 +199,27 @@ body.reading .seal{opacity:.5}
 .grid{display:grid;gap:10px}
 .grid-2{grid-template-columns:repeat(2,1fr)}
 .grid-3{grid-template-columns:repeat(3,1fr)}
+
+/* font size row */
+.size-row{
+  display:flex;align-items:center;justify-content:center;gap:18px;
+  padding:14px;border-radius:12px;
+  background:rgba(255,255,255,.04);
+  margin-bottom:14px;
+}
+.size-btn{
+  width:48px;height:48px;border-radius:14px;
+  background:rgba(184,134,46,.2);color:#e8c98a;
+  display:grid;place-items:center;
+  transition:all .15s var(--ease);
+}
+.size-btn:active{transform:scale(.9);background:rgba(184,134,46,.35)}
+.size-btn svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.size-val{
+  font-family:var(--font-mono);font-size:20px;font-weight:700;color:#e8d8a8;
+  min-width:60px;text-align:center;
+}
+.size-lbl{font-family:var(--font-mono);font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:#8a7a55}
 
 .font-card{
   padding:14px 12px;border-radius:12px;
@@ -262,6 +265,8 @@ body.reading .seal{opacity:.5}
 .action svg{width:22px;height:22px;fill:none;stroke:#e8c98a;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;flex-shrink:0}
 .action .txt{flex:1;font-family:var(--font-ui);font-size:15px;color:#e8d8a8}
 .action .sub{font-family:var(--font-mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:#8a7a55;margin-top:2px}
+.action.contact{background:rgba(184,134,46,.08);border:1px solid rgba(184,134,46,.2)}
+.action.contact svg{stroke:#d4a24a}
 
 .toggle{
   width:44px;height:26px;border-radius:999px;
@@ -277,7 +282,6 @@ body.reading .seal{opacity:.5}
 }
 .toggle.on::after{transform:translateX(18px)}
 
-/* ---- floating highlight palette ---- */
 .hl-palette{
   position:absolute;z-index:60;
   display:none;gap:6px;padding:8px;
@@ -294,7 +298,6 @@ body.reading .seal{opacity:.5}
 }
 .hl-dot:active{transform:scale(.85)}
 
-/* ---- page flip animations ---- */
 @keyframes flipOut{
   0%{transform:perspective(1400px) rotateY(0);opacity:1}
   100%{transform:perspective(1400px) rotateY(-90deg);opacity:0}
@@ -306,7 +309,6 @@ body.reading .seal{opacity:.5}
 .paper.flip-out{animation:flipOut .3s var(--ease) forwards;transform-origin:left center}
 .paper.flip-in{animation:flipIn .3s var(--ease) forwards;transform-origin:right center}
 
-/* ---- ash delete ---- */
 @keyframes ash{
   0%{opacity:1;filter:blur(0);transform:translateY(0) scale(1)}
   40%{opacity:.85;filter:blur(1px);transform:translateY(4px) scale(.995)}
@@ -315,13 +317,11 @@ body.reading .seal{opacity:.5}
 }
 .paper.ash{animation:ash 1.05s var(--ease) forwards;pointer-events:none}
 
-/* ---- reading mode ---- */
 body.reading .tb{opacity:.35}
 body.reading .tb .tb-btn:not(.read-toggle){pointer-events:none}
 body.reading .editor{cursor:default}
 body.reading .paper{padding-top:44px}
 
-/* ---- toast ---- */
 .toast{
   position:fixed;left:50%;bottom:calc(96px + env(safe-area-inset-bottom,0px));
   transform:translate(-50%,16px);
@@ -337,6 +337,74 @@ body.reading .paper{padding-top:44px}
   text-align:center;font-weight:600;
 }
 .toast.on{opacity:1;transform:translate(-50%,0)}
+
+/* PDF viewer */
+.pdf-overlay{
+  position:fixed;inset:0;z-index:1000;
+  background:#1a140c;
+  display:none;flex-direction:column;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+.pdf-overlay.on{display:flex}
+.pdf-head{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:14px 18px;
+  border-bottom:1px solid rgba(0,0,0,.4);
+  background:#241c12;flex-shrink:0;
+}
+.pdf-btn{
+  width:38px;height:38px;border-radius:10px;
+  background:rgba(255,255,255,.06);
+  display:grid;place-items:center;flex-shrink:0;
+  transition:transform .15s var(--ease);
+}
+.pdf-btn:active{transform:scale(.9);background:rgba(255,255,255,.14)}
+.pdf-btn svg{width:18px;height:18px;fill:none;stroke:#c9b58c;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pdf-title{
+  font-family:'UnifrakturMaguntia',serif;font-size:17px;
+  color:#e8d8a8;flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+  text-align:center;
+}
+.pdf-page{
+  font-family:var(--font-mono);font-size:11px;
+  letter-spacing:.15em;color:#a08860;
+  padding:4px 10px;border:1px solid rgba(180,140,80,.3);border-radius:999px;
+  flex-shrink:0;
+}
+.pdf-canvas-wrap{
+  flex:1;overflow:auto;
+  display:flex;align-items:flex-start;justify-content:center;
+  padding:20px;
+}
+#pdfCanvas{
+  max-width:100%;
+  box-shadow:0 10px 30px rgba(0,0,0,.6);
+  background:#fff;border-radius:4px;
+}
+.pdf-foot{
+  display:flex;gap:10px;
+  padding:14px 18px;
+  border-top:1px solid rgba(0,0,0,.4);
+  background:#241c12;flex-shrink:0;
+}
+.pdf-nav{
+  flex:1;padding:14px;
+  border-radius:12px;background:rgba(184,134,46,.18);
+  color:#e8c98a;font-family:var(--font-mono);font-size:12px;
+  letter-spacing:.1em;text-transform:uppercase;font-weight:600;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .15s var(--ease);
+}
+.pdf-nav:active:not(:disabled){transform:scale(.97);background:rgba(184,134,46,.3)}
+.pdf-nav:disabled{opacity:.3;pointer-events:none}
+.pdf-nav svg{width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:2.2;stroke-linecap:round;stroke-linejoin:round}
+.pdf-empty{
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  gap:12px;flex:1;padding:40px;text-align:center;
+  color:#8a7a55;font-family:var(--font-mono);font-size:12px;
+  letter-spacing:.15em;text-transform:uppercase;
+}
 </style>
 </head>
 <body>
@@ -385,7 +453,6 @@ body.reading .paper{padding-top:44px}
     </button>
   </nav>
 
-  <!-- highlight palette (floats above selection) -->
   <div class="hl-palette" id="hlPalette">
     <button class="hl-dot" data-color="hl-yellow" style="background:rgba(255,222,80,.85)"></button>
     <button class="hl-dot" data-color="hl-green" style="background:rgba(150,220,120,.85)"></button>
@@ -397,18 +464,28 @@ body.reading .paper{padding-top:44px}
     </button>
   </div>
 
-  <!-- fonts sheet -->
   <div class="sheet" id="sheetFont">
     <div class="sheet-head">
-      <div class="sheet-title">Choose a font</div>
+      <div class="sheet-title">Font & size</div>
       <button class="sheet-close" data-close="sheetFont"><svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
     </div>
     <div class="sheet-body">
+      <div class="size-row">
+        <button class="size-btn" id="fontDec" aria-label="Smaller">
+          <svg viewBox="0 0 24 24"><path d="M5 12h14"/></svg>
+        </button>
+        <div>
+          <div class="size-val" id="fontSizeVal">22</div>
+          <div class="size-lbl" style="text-align:center">Size</div>
+        </div>
+        <button class="size-btn" id="fontInc" aria-label="Bigger">
+          <svg viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></svg>
+        </button>
+      </div>
       <div class="grid grid-2" id="fontGrid"></div>
     </div>
   </div>
 
-  <!-- themes sheet -->
   <div class="sheet" id="sheetTheme">
     <div class="sheet-head">
       <div class="sheet-title">Paper</div>
@@ -419,7 +496,6 @@ body.reading .paper{padding-top:44px}
     </div>
   </div>
 
-  <!-- menu sheet -->
   <div class="sheet" id="sheetMenu">
     <div class="sheet-head">
       <div class="sheet-title">Menu</div>
@@ -431,9 +507,17 @@ body.reading .paper{padding-top:44px}
           <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><path d="M3 9h18M9 3v18"/></svg>
           <div class="txt">Paper theme<div class="sub">Texture of the page</div></div>
         </button>
+        <button class="action" id="actPhoto">
+          <svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><path d="m21 15-5-5L5 21"/></svg>
+          <div class="txt">Insert photo<div class="sub">From your gallery</div></div>
+        </button>
         <button class="action" id="actExport">
           <svg viewBox="0 0 24 24"><path d="M12 3v12M7 10l5 5 5-5M5 21h14"/></svg>
           <div class="txt">Export .txt<div class="sub">Save all pages as text</div></div>
+        </button>
+        <button class="action" id="actPdf">
+          <svg viewBox="0 0 24 24"><path d="M14 3H6a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/><path d="M14 3v6h6"/></svg>
+          <div class="txt">Open PDF<div class="sub">Read a PDF file</div></div>
         </button>
         <button class="action" id="actDelete">
           <svg viewBox="0 0 24 24"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2M19 6l-1 14a2 2 0 0 1-2 2H8a2 2 0 0 1-2-2L5 6"/></svg>
@@ -444,6 +528,16 @@ body.reading .paper{padding-top:44px}
           <div class="txt">Sounds<div class="sub">Tap feedback</div></div>
           <button class="toggle on" id="togSound"></button>
         </div>
+
+        <a class="action contact" href="mailto:mohamed005cheikh@gmail.com">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2z"/><path d="m22 6-10 7L2 6"/></svg>
+          <div class="txt">Email<div class="sub">mohamed005cheikh@gmail.com</div></div>
+        </a>
+        <a class="action contact" href="https://wa.me/22230726475" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M20.52 3.449C18.24 1.245 15.24 0 12.045 0 5.463 0 .104 5.334.101 11.893c0 2.096.549 4.14 1.595 5.945L0 24l6.335-1.652a11.9 11.9 0 0 0 5.71 1.447h.006c6.585 0 11.946-5.336 11.949-11.896a11.82 11.82 0 0 0-3.48-8.45z"/></svg>
+          <div class="txt">WhatsApp<div class="sub">+222 30 72 64 75</div></div>
+        </a>
+
         <div class="action" style="cursor:default">
           <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4l3 2"/></svg>
           <div class="txt">Note88 · v1.0<div class="sub">MC88 · Mohamed Cheikh</div></div>
@@ -453,12 +547,35 @@ body.reading .paper{padding-top:44px}
   </div>
 
 </div>
+
+<div class="pdf-overlay" id="pdfOverlay">
+  <div class="pdf-head">
+    <button class="pdf-btn" id="pdfClose" aria-label="Close">
+      <svg viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg>
+    </button>
+    <div class="pdf-title" id="pdfTitle">Document</div>
+    <div class="pdf-page" id="pdfPageInd">— / —</div>
+  </div>
+  <div class="pdf-canvas-wrap" id="pdfWrap">
+    <canvas id="pdfCanvas"></canvas>
+  </div>
+  <div class="pdf-foot">
+    <button class="pdf-nav" id="pdfPrev">
+      <svg viewBox="0 0 24 24"><path d="m15 18-6-6 6-6"/></svg>
+      Previous
+    </button>
+    <button class="pdf-nav" id="pdfNext">
+      Next
+      <svg viewBox="0 0 24 24"><path d="m9 18 6-6-6-6"/></svg>
+    </button>
+  </div>
+</div>
+
 <div class="toast" id="toast"></div>
 
 <script>
 'use strict';
 
-/* -------- dom -------- */
 const $ = id => document.getElementById(id);
 const editor   = $('editor');
 const paper    = $('paper');
@@ -469,19 +586,18 @@ const hlPal    = $('hlPalette');
 
 /* -------- fonts -------- */
 const FONTS = [
-  { id:'pirata',    name:'Pirata',     family:"'Pirata One', serif",              sample:'Hello' },
-  { id:'unifraktur',name:'Unifraktur', family:"'UnifrakturMaguntia', serif",      sample:'Hello' },
-  { id:'grenze',    name:'Grenze',     family:"'Grenze Gotisch', serif",          sample:'Hello' },
-  { id:'medieval',  name:'Medieval',   family:"'MedievalSharp', serif",           sample:'Hello' },
-  { id:'caveat',    name:'Caveat',     family:"'Caveat', cursive",                sample:'Hello' },
-  { id:'kalam',     name:'Kalam',      family:"'Kalam', cursive",                 sample:'Hello' },
-  { id:'shadows',   name:'Shadows',    family:"'Shadows Into Light', cursive",    sample:'Hello' },
-  { id:'patrick',   name:'Patrick',    family:"'Patrick Hand', cursive",          sample:'Hello' },
-  { id:'gochi',     name:'Gochi',      family:"'Gochi Hand', cursive",            sample:'Hello' },
-  { id:'homemade',  name:'Homemade',   family:"'Homemade Apple', cursive",        sample:'Hello' }
+  { id:'pirata',    name:'Pirata',     family:"'Pirata One', serif",           sample:'Hello' },
+  { id:'unifraktur',name:'Unifraktur', family:"'UnifrakturMaguntia', serif",   sample:'Hello' },
+  { id:'grenze',    name:'Grenze',     family:"'Grenze Gotisch', serif",       sample:'Hello' },
+  { id:'medieval',  name:'Medieval',   family:"'MedievalSharp', serif",        sample:'Hello' },
+  { id:'caveat',    name:'Caveat',     family:"'Caveat', cursive",             sample:'Hello' },
+  { id:'kalam',     name:'Kalam',      family:"'Kalam', cursive",              sample:'Hello' },
+  { id:'shadows',   name:'Shadows',    family:"'Shadows Into Light', cursive", sample:'Hello' },
+  { id:'patrick',   name:'Patrick',    family:"'Patrick Hand', cursive",       sample:'Hello' },
+  { id:'gochi',     name:'Gochi',      family:"'Gochi Hand', cursive",         sample:'Hello' },
+  { id:'homemade',  name:'Homemade',   family:"'Homemade Apple', cursive",     sample:'Hello' }
 ];
 
-/* -------- themes -------- */
 const THEMES = [
   { id:'parchment', name:'Parchment', cls:'theme-parchment' },
   { id:'linen',     name:'Linen',     cls:'theme-linen' },
@@ -490,10 +606,9 @@ const THEMES = [
   { id:'cream',     name:'Cream',     cls:'theme-cream' }
 ];
 
-/* -------- state -------- */
 const KEY = 'note88.v1';
 let state = {
-  pages: [{ id:'p1', html:'', font:'caveat' }],
+  pages: [{ id:'p1', html:'', font:'caveat', size:22 }],
   index: 0,
   theme: 'parchment',
   sound: true
@@ -503,7 +618,8 @@ function load(){
   try {
     const raw = localStorage.getItem(KEY);
     if (raw) state = Object.assign(state, JSON.parse(raw));
-    if (!state.pages.length) state.pages = [{ id:'p1', html:'', font:'caveat' }];
+    if (!state.pages.length) state.pages = [{ id:'p1', html:'', font:'caveat', size:22 }];
+    state.pages.forEach(p => { if (!p.size) p.size = 22; });
     if (state.index < 0 || state.index >= state.pages.length) state.index = 0;
   } catch(_) {}
 }
@@ -511,7 +627,6 @@ function save(){
   try { localStorage.setItem(KEY, JSON.stringify(state)); } catch(_) {}
 }
 
-/* -------- audio -------- */
 let audioCtx = null;
 function initAudio(){ if(audioCtx) return; try { audioCtx = new (window.AudioContext||window.webkitAudioContext)(); } catch(_){} }
 function beep(freq, dur, vol){
@@ -535,7 +650,6 @@ const sfx = {
   erase: () => beep(220, 0.18, 0.045)
 };
 
-/* -------- toast -------- */
 let toastTimer;
 function toast(msg){
   toastEl.textContent = msg;
@@ -544,7 +658,6 @@ function toast(msg){
   toastTimer = setTimeout(()=>toastEl.classList.remove('on'), 2000);
 }
 
-/* -------- rendering -------- */
 function applyTheme(){
   THEMES.forEach(t => paper.classList.remove(t.cls));
   const t = THEMES.find(x => x.id === state.theme) || THEMES[0];
@@ -553,7 +666,6 @@ function applyTheme(){
     el.classList.toggle('active', el.dataset.theme === t.id);
   });
 }
-
 function applyFont(fontId){
   const f = FONTS.find(x => x.id === fontId) || FONTS[4];
   editor.style.fontFamily = f.family;
@@ -561,22 +673,25 @@ function applyFont(fontId){
     el.classList.toggle('active', el.dataset.font === f.id);
   });
 }
-
+function applySize(size){
+  editor.style.fontSize = size + 'px';
+  const v = $('fontSizeVal');
+  if (v) v.textContent = size;
+}
 function renderPage(){
   const p = state.pages[state.index];
   editor.innerHTML = p.html || '';
   applyFont(p.font || 'caveat');
+  applySize(p.size || 22);
   pageInd.textContent = (state.index + 1) + ' / ' + state.pages.length;
   updateDirAuto();
 }
-
 function updateDirAuto(){
   const txt = editor.textContent || '';
   const arabic = /[\u0600-\u06FF]/.test(txt);
   editor.setAttribute('dir', arabic ? 'rtl' : 'ltr');
 }
 
-/* -------- persistence with debounce -------- */
 let saveTimer;
 function scheduleSave(){
   clearTimeout(saveTimer);
@@ -585,31 +700,22 @@ function scheduleSave(){
     save();
   }, 400);
 }
-
-editor.addEventListener('input', () => {
-  updateDirAuto();
-  scheduleSave();
-});
+editor.addEventListener('input', () => { updateDirAuto(); scheduleSave(); });
 editor.addEventListener('blur', () => {
   state.pages[state.index].html = editor.innerHTML;
   save();
 });
 
-/* -------- page flip -------- */
 let flipping = false;
 function flipTo(newIndex, direction){
   if (flipping || newIndex === state.index) return;
   if (newIndex < 0 || newIndex >= state.pages.length) return;
   flipping = true;
-
-  // save current before leaving
   state.pages[state.index].html = editor.innerHTML;
   state.index = newIndex;
   save();
-
   paper.classList.add(direction > 0 ? 'flip-out' : 'flip-in');
   sfx.flip();
-
   setTimeout(() => {
     paper.classList.remove('flip-out', 'flip-in');
     renderPage();
@@ -621,15 +727,13 @@ function flipTo(newIndex, direction){
   }, 300);
 }
 
-/* -------- new page -------- */
 function newPage(){
   state.pages[state.index].html = editor.innerHTML;
+  const cur = state.pages[state.index];
   const id = 'p' + Date.now();
-  state.pages.push({ id, html:'', font: state.pages[state.index].font || 'caveat' });
-  const dir = 1;
+  state.pages.push({ id, html:'', font: cur.font || 'caveat', size: cur.size || 22 });
   state.index = state.pages.length - 1;
   save();
-
   paper.classList.add('flip-out');
   sfx.newP();
   setTimeout(() => {
@@ -641,10 +745,8 @@ function newPage(){
   toast('New page');
 }
 
-/* -------- delete current page -------- */
 function deletePage(){
   if (state.pages.length === 1){
-    // last page — clear instead
     editor.innerHTML = '';
     state.pages[0].html = '';
     save();
@@ -666,9 +768,8 @@ function deletePage(){
   toast('Page turned to ash');
 }
 
-/* -------- highlight palette -------- */
+/* -------- highlight -------- */
 let savedRange = null;
-
 function saveSelection(){
   const sel = window.getSelection();
   if (sel && sel.rangeCount > 0) {
@@ -676,7 +777,6 @@ function saveSelection(){
     if (editor.contains(r.commonAncestorContainer)) savedRange = r.cloneRange();
   }
 }
-
 function showPalette(){
   if (!savedRange || savedRange.collapsed) return;
   const rect = savedRange.getBoundingClientRect();
@@ -687,23 +787,14 @@ function showPalette(){
   hlPal.style.left = left + 'px';
   hlPal.classList.add('on');
 }
-function hidePalette(){
-  hlPal.classList.remove('on');
-}
+function hidePalette(){ hlPal.classList.remove('on'); }
 
 document.addEventListener('selectionchange', () => {
   const sel = window.getSelection();
-  if (!sel || sel.rangeCount === 0 || sel.isCollapsed){
-    hidePalette();
-    return;
-  }
+  if (!sel || sel.rangeCount === 0 || sel.isCollapsed){ hidePalette(); return; }
   const r = sel.getRangeAt(0);
-  if (editor.contains(r.commonAncestorContainer)){
-    saveSelection();
-    showPalette();
-  } else {
-    hidePalette();
-  }
+  if (editor.contains(r.commonAncestorContainer)){ saveSelection(); showPalette(); }
+  else hidePalette();
 });
 
 hlPal.addEventListener('click', e => {
@@ -711,20 +802,14 @@ hlPal.addEventListener('click', e => {
   if (!btn) return;
   const color = btn.dataset.color;
   if (!savedRange) return;
-
-  // restore selection
   const sel = window.getSelection();
   sel.removeAllRanges();
   sel.addRange(savedRange);
-
   if (color === 'clear'){
     document.execCommand('removeFormat', false, null);
-    // also unwrap existing marks
     const html = editor.innerHTML;
     editor.innerHTML = html.replace(/<mark[^>]*>(.*?)<\/mark>/g, '$1');
   } else {
-    // paint using hiliteColor with a semi-transparent overlay via <mark> wrapper if needed
-    // simplest cross-platform: use hiliteColor with rgb
     const colorMap = {
       'hl-yellow': 'rgba(255,222,80,.7)',
       'hl-green':  'rgba(150,220,120,.6)',
@@ -734,7 +819,6 @@ hlPal.addEventListener('click', e => {
     };
     document.execCommand('hiliteColor', false, colorMap[color]);
   }
-
   state.pages[state.index].html = editor.innerHTML;
   save();
   hidePalette();
@@ -754,7 +838,7 @@ document.querySelectorAll('[data-close]').forEach(btn => {
   btn.addEventListener('click', () => { closeSheets(); sfx.tap(); });
 });
 
-/* -------- build font grid -------- */
+/* -------- font grid -------- */
 const fontGrid = $('fontGrid');
 FONTS.forEach(f => {
   const card = document.createElement('button');
@@ -774,7 +858,7 @@ FONTS.forEach(f => {
   fontGrid.appendChild(card);
 });
 
-/* -------- build theme grid -------- */
+/* -------- theme grid -------- */
 const themeGrid = $('themeGrid');
 THEMES.forEach(t => {
   const card = document.createElement('button');
@@ -792,14 +876,13 @@ THEMES.forEach(t => {
   themeGrid.appendChild(card);
 });
 
-/* -------- toolbar actions -------- */
+/* -------- toolbar -------- */
 $('btnPrev').addEventListener('click', () => { sfx.tap(); flipTo(state.index - 1, -1); });
 $('btnNext').addEventListener('click', () => { sfx.tap(); flipTo(state.index + 1, 1); });
 $('btnNew').addEventListener('click', newPage);
 $('btnFont').addEventListener('click', () => { sfx.tap(); openSheet('sheetFont'); });
 $('btnHighlight').addEventListener('click', () => {
   sfx.tap();
-  // trigger by saving current selection — palette may already be visible
   saveSelection();
   if (savedRange && !savedRange.collapsed) showPalette();
   else toast('Select text first');
@@ -811,13 +894,42 @@ $('btnRead').addEventListener('click', () => {
   toast(document.body.classList.contains('reading') ? 'Reading mode' : 'Edit mode');
 });
 
+/* -------- font size buttons -------- */
+$('fontDec').addEventListener('click', () => {
+  const p = state.pages[state.index];
+  p.size = Math.max(14, (p.size || 22) - 2);
+  applySize(p.size);
+  save();
+  sfx.tap();
+});
+$('fontInc').addEventListener('click', () => {
+  const p = state.pages[state.index];
+  p.size = Math.min(48, (p.size || 22) + 2);
+  applySize(p.size);
+  save();
+  sfx.tap();
+});
+
 /* -------- menu actions -------- */
 $('actTheme').addEventListener('click', () => { sfx.tap(); openSheet('sheetTheme'); });
 $('actDelete').addEventListener('click', () => { closeSheets(); deletePage(); });
 
+$('actPhoto').addEventListener('click', () => {
+  sfx.tap();
+  closeSheets();
+  if (window.Android && Android.pickPhoto) Android.pickPhoto();
+  else toast('Photo picker not available');
+});
+
+$('actPdf').addEventListener('click', () => {
+  sfx.tap();
+  closeSheets();
+  if (window.Android && Android.pickPdf) Android.pickPdf();
+  else toast('PDF picker not available');
+});
+
 $('actExport').addEventListener('click', () => {
   sfx.tap();
-  // strip html + join pages
   const div = document.createElement('div');
   const parts = state.pages.map((p, i) => {
     div.innerHTML = p.html || '';
@@ -839,7 +951,95 @@ $('togSound').addEventListener('click', e => {
   if (state.sound) sfx.tap();
 });
 
-/* -------- prevent zoom on double-tap -------- */
+/* -------- photo insert -------- */
+window.onPhotoPicked = function(b64){
+  editor.focus();
+  const img = `<img src="data:image/jpeg;base64,${b64}" alt="">`;
+  document.execCommand('insertHTML', false, img);
+  state.pages[state.index].html = editor.innerHTML;
+  save();
+  sfx.tap();
+  toast('Photo inserted');
+};
+
+/* -------- PDF viewer -------- */
+let pdfDoc = null;
+let pdfPage = 1;
+let pdfScale = 1.6;
+const pdfOverlay = $('pdfOverlay');
+const pdfCanvas = $('pdfCanvas');
+const pdfCtx = pdfCanvas.getContext('2d');
+const pdfWrap = $('pdfWrap');
+
+async function loadPdfJs(){
+  if (window.pdfjsLib) return;
+  await new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js';
+    s.onload = resolve;
+    s.onerror = () => reject(new Error('pdf.js failed to load'));
+    document.head.appendChild(s);
+  });
+  window.pdfjsLib.GlobalWorkerOptions.workerSrc =
+    'https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.worker.min.js';
+}
+
+window.onPdfLoaded = async function(b64){
+  try {
+    toast('Loading PDF…');
+    await loadPdfJs();
+    const bin = atob(b64);
+    const bytes = new Uint8Array(bin.length);
+    for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+    pdfDoc = await window.pdfjsLib.getDocument({ data: bytes }).promise;
+    pdfPage = 1;
+    pdfOverlay.classList.add('on');
+    await renderPdfPage();
+    sfx.tap();
+  } catch (e) {
+    console.error(e);
+    toast('Could not open PDF');
+  }
+};
+
+window.onPdfError = function(){
+  toast('Could not read the file');
+};
+
+async function renderPdfPage(){
+  if (!pdfDoc) return;
+  const page = await pdfDoc.getPage(pdfPage);
+  const viewport = page.getViewport({ scale: pdfScale });
+  pdfCanvas.width = viewport.width;
+  pdfCanvas.height = viewport.height;
+  await page.render({ canvasContext: pdfCtx, viewport }).promise;
+  $('pdfPageInd').textContent = pdfPage + ' / ' + pdfDoc.numPages;
+  $('pdfPrev').disabled = pdfPage <= 1;
+  $('pdfNext').disabled = pdfPage >= pdfDoc.numPages;
+  pdfWrap.scrollTop = 0;
+}
+
+$('pdfPrev').addEventListener('click', async () => {
+  if (!pdfDoc || pdfPage <= 1) return;
+  pdfPage--;
+  sfx.flip();
+  await renderPdfPage();
+});
+$('pdfNext').addEventListener('click', async () => {
+  if (!pdfDoc || pdfPage >= pdfDoc.numPages) return;
+  pdfPage++;
+  sfx.flip();
+  await renderPdfPage();
+});
+$('pdfClose').addEventListener('click', () => {
+  pdfOverlay.classList.remove('on');
+  pdfDoc = null;
+  pdfCanvas.width = 1;
+  pdfCanvas.height = 1;
+  sfx.tap();
+});
+
+/* -------- boot -------- */
 let lastTouch = 0;
 document.addEventListener('touchend', e => {
   const now = Date.now();
@@ -847,14 +1047,11 @@ document.addEventListener('touchend', e => {
   lastTouch = now;
 }, { passive: false });
 
-/* -------- boot -------- */
 load();
 applyTheme();
-applyFont(state.pages[state.index].font || 'caveat');
 renderPage();
 $('togSound').classList.toggle('on', state.sound);
 
-// unlock audio on first interaction
 document.addEventListener('touchstart', initAudio, { once:true });
 document.addEventListener('click', initAudio, { once:true });
 
@@ -862,4 +1059,4 @@ console.log('%cNote88','color:#b8862e;font-family:Georgia;font-size:14px;font-we
 console.log('© 2026 MC88 — Mohamed Cheikh');
 </script>
 </body>
-  </html>
+</html>
